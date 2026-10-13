@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Activities Main Menu</title>
+</head>
+<body>
+
+    <!--
+    Name: Mark Glemwell Ysid P. Jasmin
+    Section: WED 7:30 AM - 12:30 PM
+    Subject: Event Drive Programming
+    Professor: Owen Adizas
+    -->
+    <h1>JavaScript Activities Main Menu</h1>
+    <h2>Main Menu</h2>
+    <button onclick="showActivity('setArrayActivity')">1. Set and Array</button>
+    <button onclick="showActivity('whileActivity')">2. While Loop Array</button>
+    <button onclick="showActivity('enrollmentActivity')">3. Student Enrollment</button>
+    <button onclick="showActivity('quizActivity')">4. JavaScript Quiz</button>
+    <button onclick="showActivity('schoolActivity')">5. School Search</button>
+    <button onclick="showActivity('gradeActivity')">6. Student Grade Checker</button>
+    <button onclick="showActivity('timerActivity')">7. JavaScript Countdown Timer</button>
+    <button onclick="showActivity('home')">Home</button>
+    <hr>
+
+    <div id="home">
+        <h2>Welcome!</h2>
+        <p>Select an activity from the Main Menu above.</p>
+    </div>
+
+    <div id="setArrayActivity" hidden>
+        <h2>Set and Array Activity</h2>
+    
+        <h2>Set</h2>
+        <label for="setInput">Enter an item:</label>
+        <input type="text" id="setInput">
+        <button onclick="addToSet()">Add to Set</button>
+        <button onclick="removeFromSet()">Remove</button>
+        <button onclick="clearSet()">Clear Set</button>
+    
+        <h3>Items in Set:</h3>
+        <div id="setList"></div>
+        <p id="setSize">Set Size: 0</p>
+    
+        <hr>
+    
+        <h2>Array</h2>
+        <label for="arrayInput">Enter an item:</label>
+        <input type="text" id="arrayInput">
+        <button onclick="addToArray()">Add to Array</button>
+        <button onclick="removeFromArray()">Remove</button>
+        <button onclick="clearArray()">Clear Array</button>
+    
+        <h3>Items in Array:</h3>
+        <ol id="arrayList"></ol>
+        <p id="arrayLength">Array Length: 0</p>
+    </div>
+
+    <div id="whileActivity" hidden>
+        <h2>While Loop - Array Activity</h2>
+    
+        <!-- Dito maglalagay ng item si user. -->
+        <div>
+            <label for="itemInput">Enter an item:</label><br>
+            <input type="text" id="itemInput">
+            <button id="addBtn" onclick="addItem()">Add Item</button>
+            <button id="stopBtn" onclick="stopProgram()">Stop</button>
+            <button onclick="restartActivity()">Restart Activity</button>
+        </div><br>
+    
+        <!-- Ipapakita nito ang items at ang total. -->
+        <h3>Items:</h3>
+        <ol id="itemsList"></ol>
+    
+        <div id="totalItems">Total Items: 0</div>
+    
+        <div id="statusMessage">Program is running...</div>
+    </div>
+
+    <div id="enrollmentActivity" hidden>
+        <h2>Student Enrollment System</h2>
+    
+        <!-- Dito ilalagay ang name at pagpili ng subject. -->
+        <p><label for="studentName">Student Name:</label></p>
+        <input type="text" id="studentName">
+    
+        <p><label for="subjectSelect">Select Subject:</label></p>
+        <select id="subjectSelect" onchange="showStudents()">
+            <option value="Database">Database</option>
+            <option value="Networking">Networking</option>
+            <option value="Web Development">Web Development</option>
+            <option value="JavaScript" selected>JavaScript</option>
+        </select>
+        <br><br>
+    
+        <!-- Matitrigger ang functions kapag clinick ni user ang button. -->
+        <button onclick="enrollStudent()">Enroll Student</button>
+        <button onclick="showStudents()">Show Students</button>
+        <button onclick="clearEnrollments()">Clear</button>
+    
+        <!-- Papakita nito ang result at student list. -->
+        <h3>Enrollment Status:</h3>
+        <p id="enrollmentStatus"></p>
+    
+        <h3>Students Enrolled in Selected Subject:</h3>
+        <h4 id="subjectHeading"></h4>
+        <ol id="studentsList"></ol>
+    </div>
+
+    <div id="quizActivity" hidden>
+        <h2>JavaScript Quiz Game</h2>
+    
+        <!-- Papakita nito ang question at answer buttons. -->
+        <p id="question"></p>
+    
+        <div id="choices">
+            <button id="choice1" onclick="checkAnswer(0)"></button>
+            <button id="choice2" onclick="checkAnswer(1)"></button>
+            <button id="choice3" onclick="checkAnswer(2)"></button>
+            <button id="choice4" onclick="checkAnswer(3)"></button>
+        </div>
+    
+        <!-- Dito ididisplay ang result at score. -->
+        <p id="result"></p>
+        <p id="score">Score: 0</p>
+    
+        <button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button id="restartBtn" onclick="restartQuiz()" hidden>Restart Quiz</button>
+    </div>
+
+    <div id="schoolActivity" hidden>
+        <h2>School Search Program</h2>
+        <label for="schoolInput">Enter a school name:</label>
+        <input type="text" id="schoolInput">
+        <button onclick="searchSchool()">Search</button>
+        <p id="schoolResult"></p>
+    </div>
+
+    <div id="gradeActivity" hidden>
+        <h2>Student Grade Checker</h2>
+        <label for="gradeInput">Enter your grade:</label>
+        <input type="number" id="gradeInput" min="0" max="100" step="any" placeholder="Enter grade">
+        <button onclick="checkGrade()">Check</button>
+        <p id="gradeResult"></p>
+        <p>Passing grade: 75</p>
+    </div>
+
+    <div id="timerActivity" hidden>
+        <h2>Countdown Timer</h2>
+        <label for="timer-input">Starting time in seconds:</label>
+        <input type="number" id="timer-input" value="60" min="1" step="1">
+        <p id="countdown">Time Remaining: 60 seconds</p>
+        <p id="display-msg"></p>
+        <button id="btn-start" onclick="startTimer()">Start</button>
+        <button id="btn-pause" onclick="stopTimer()">Pause</button>
+        <button id="btn-resume" onclick="resumeTimer()">Resume</button>
+        <button id="btn-reset" onclick="resetTimer()">Reset</button>
+    </div>
+
+    <script>
+
+        // Nakatago muna lahat ng activities dahil sa hidden attribute, lalabas lang ito kapag nakapili na si user.
+        function showActivity(activityId) {
+            document.getElementById("home").hidden = true;
+            document.getElementById("setArrayActivity").hidden = true;
+            document.getElementById("whileActivity").hidden = true;
+            document.getElementById("enrollmentActivity").hidden = true;
+            document.getElementById("quizActivity").hidden = true;
+            document.getElementById("schoolActivity").hidden = true;
+            document.getElementById("gradeActivity").hidden = true;
+            document.getElementById("timerActivity").hidden = true;
+            document.getElementById(activityId).hidden = false;
+        }
+
+        // Activity for Set at Array.
+        // Ini-store ang unique items sa Set at lahat ng items sa Array.
+        let itemSet = new Set();
+        let itemArray = [];
+
+        // Ididisplay nito ang lahat ng items at ang size ng set.
+        function showSet() {
+            let list = document.getElementById("setList");
+            list.textContent = "";
+
+            itemSet.forEach(function(item) {
+                list.appendChild(document.createTextNode(item));
+                list.appendChild(document.createElement("br"));
+            });
+
+            document.getElementById("setSize").textContent = "Set Size: " + itemSet.size;
+        }
+
+        // Sa set, hindi nadodoble ang item kapag nag-add ng item si user.
+        function addToSet() {
+            let input = document.getElementById("setInput");
+            let item = input.value.trim();
+
+            if (item === "") {
+                alert("Please enter an item!");
+            } else {
+                itemSet.add(item);
+                input.value = "";
+                showSet();
+            }
+        }
+
+        // Tatanggalin ang item na nilagay sa Set textbox.
+        function removeFromSet() {
+            let input = document.getElementById("setInput");
+            let item = input.value.trim();
+
+            if (item === "") {
+                alert("Enter the item you want to remove.");
+            } else {
+                itemSet.delete(item);
+                input.value = "";
+                showSet();
+            }
+        }
+
+        // Tatanggalin ang lahat ng items sa Set at lilinisin ang textbox.
+        function clearSet() {
+            itemSet.clear();
+            document.getElementById("setInput").value = "";
+            showSet();
+        }
+
+        // Ididisplay nito ang lahat ng items at ang length ng array.
+        function showArray() {
+            let list = document.getElementById("arrayList");
+            list.textContent = "";
+            let i = 0;
+
+            while (i < itemArray.length) {
+                let item = document.createElement("li");
+                item.textContent = itemArray[i];
+                list.appendChild(item);
+                i = i + 1;
+            }
+
+            document.getElementById("arrayLength").textContent = "Array Length: " + itemArray.length;
+        }
+
+        // Puwedeng maulit ang items sa Array.
+        function addToArray() {
+            let input = document.getElementById("arrayInput");
+            let item = input.value.trim();
+
+            if (item === "") {
+                alert("Please enter an item!");
+            } else {
+                itemArray.push(item);
+                input.value = "";
+                showArray();
+            }
+        }
+
+        // Tatanggalin ang unang item na kapareho ng nilagay sa Array textbox.
+        function removeFromArray() {
+            let input = document.getElementById("arrayInput");
+            let item = input.value.trim();
+
+            if (item === "") {
+                alert("Enter the item you want to remove.");
+            } else {
+                let position = itemArray.indexOf(item);
+
+                if (position !== -1) {
+                    itemArray.splice(position, 1);
+                }
+
+                input.value = "";
+                showArray();
+            }
+        }
+
+        // Alisin ang lahat ng Array items at linisin ang textbox.
+        function clearArray() {
+            itemArray = [];
+            document.getElementById("arrayInput").value = "";
+            showArray();
+        }
+    
+
+        // Activity para sa Array gamit ang while loop.
+        // Dito i-save ang mga items.
+        let items = [];
+
+        // Puwedeng mag-add ng items hanggang ma-click ang Stop.
+        let running = true;
+
+        // Kunin ang mga HTML element na gagamitin.
+        let whileInput = document.getElementById("itemInput");
+        let addButton = document.getElementById("addBtn");
+        let whileList = document.getElementById("itemsList");
+        let total = document.getElementById("totalItems");
+        let whileMessage = document.getElementById("statusMessage");
+
+        // Mag-add ng isang item.
+        function addItem() {
+            if (running === true) {
+                // Basahin ang item at alisin ang sobrang spaces.
+                let item = whileInput.value.trim();
+
+                if (item === "") {
+                    alert("Please enter an item!");
+                } else {
+                    items.push(item);
+
+                    // Linisin ang textbox para sa susunod na item.
+                    whileInput.value = "";
+                    whileInput.focus();
+
+                    showItems();
+                }
+            }
+        }
+
+        // Ipakita ang lahat ng items.
+        function showItems() {
+            whileList.textContent = "";
+            let i = 0;
+
+            while (i < items.length) {
+                let item = document.createElement("li");
+                item.textContent = items[i];
+                whileList.appendChild(item);
+                i = i + 1;
+            }
+            total.textContent = "Total Items: " + items.length;
+        }
+
+        // I-stop ang pag-add ng items.
+        function stopProgram() {
+            running = false;
+
+            whileInput.disabled = true;
+            addButton.disabled = true;
+
+            whileMessage.textContent = "Program stopped. You can no longer add items.";
+        }
+        // Alisin ang items at payagan ulit ang pag-add.
+        function restartActivity() {
+            items = [];
+            running = true;
+            whileInput.value = "";
+            whileInput.disabled = false;
+            addButton.disabled = false;
+            whileMessage.textContent = "Program is running...";
+            showItems();
+        }
+    
+
+        // Activity para sa student enrollment.
+        // Gumamit ng Set para malaman kung may duplicate enrollment.
+        let enrollments = new Set();
+
+        // Magkapareho ang index ng name at subject sa dalawang Array.
+        let names = [];
+        let subjects = [];
+
+        // Kunin ang mga HTML element na gagamitin.
+        let nameInput = document.getElementById("studentName");
+        let subjectInput = document.getElementById("subjectSelect");
+        let enrollmentMessage = document.getElementById("enrollmentStatus");
+        let heading = document.getElementById("subjectHeading");
+        let enrollmentList = document.getElementById("studentsList");
+
+        // Mag-enroll ng isang student.
+        function enrollStudent() {
+            let name = nameInput.value.trim();
+            let subject = subjectInput.value;
+
+            if (name !== "") {
+                // Gawing lowercase ang name para ma-check ang duplicates.
+                let entry = subject + ":" + name.toLowerCase();
+
+                if (enrollments.has(entry)) {
+                    enrollmentMessage.textContent = name + " is already enrolled in " + subject + ".";
+                } else {
+                    // I-save ang name at subject.
+                    enrollments.add(entry);
+                    names.push(name);
+                    subjects.push(subject);
+                    enrollmentMessage.textContent = name + " successfully enrolled in " + subject + ".";
+                }
+
+                showStudents();
+            } else {
+                enrollmentMessage.textContent = "Please enter a student name.";
+            }
+        }
+
+        // Ipakita ang enrolled students sa napiling subject.
+        function showStudents() {
+            let subject = subjectInput.value;
+            enrollmentList.textContent = "";
+            let i = 0;
+            let number = 1;
+
+            while (i < names.length) {
+                if (subjects[i] === subject) {
+                    let student = document.createElement("li");
+                    student.textContent = names[i];
+                    enrollmentList.appendChild(student);
+                    number = number + 1;
+                }
+                i = i + 1;
+            }
+
+            // Kapag 1 pa rin ang number, walang enrolled student na nakita.
+            if (number === 1) {
+                heading.textContent = "";
+                enrollmentList.textContent = "No students enrolled in " + subject + ".";
+            } else {
+                heading.textContent = subject;
+            }
+        }
+
+        // I-clear lang ang enrollment list ng napiling subject.
+        function clearEnrollments() {
+            let subject = subjectInput.value;
+            let i = names.length - 1;
+
+            while (i >= 0) {
+                if (subjects[i] === subject) {
+                    enrollments.delete(subject + ":" + names[i].toLowerCase());
+                    names.splice(i, 1);
+                    subjects.splice(i, 1);
+                }
+                i = i - 1;
+            }
+            nameInput.value = "";
+            enrollmentMessage.textContent = "Enrollment records for " + subject + " have been cleared.";
+            showStudents();
+        }
+
+        // Ipakita ang student list kapag binuksan ang page.
+        showStudents();
+    
+
+        // Activity para sa JavaScript quiz.
+        // Dito i-save ang questions at choices.
+        // Sa 0 nagsisimula ang index ng choices.
+        let questions = [
+            {
+                question: "What is the correct way to declare a variable in JavaScript?",
+                choices: ["var x", "variable x", "declare x", "int x"],
+                answer: 0
+            },
+            {
+                question: "Which symbol is used for addition?",
+                choices: ["-", "+", "*", "/"],
+                answer: 1
+            },
+            {
+                question: "Which event happens when a button is clicked?",
+                choices: ["onload", "onchange", "onclick", "onkeydown"],
+                answer: 2
+            },
+            {
+                question: "Which JavaScript structure stores multiple values?",
+                choices: ["Function", "Loop", "String", "Array"],
+                answer: 3
+            },
+            {
+                question: "Which statement is used for decision making?",
+                choices: ["for", "while", "if...else", "return"],
+                answer: 2
+            }
+        ];
+
+        // Magsimula sa unang question.
+        let current = 0;
+        let score = 0;
+
+        // Isang answer lang ang puwede sa bawat question.
+        let answered = false;
+
+        // Kunin ang mga HTML element na gagamitin.
+        let questionText = document.getElementById("question");
+        let choices = document.getElementById("choices");
+        let choice1 = document.getElementById("choice1");
+        let choice2 = document.getElementById("choice2");
+        let choice3 = document.getElementById("choice3");
+        let choice4 = document.getElementById("choice4");
+        let result = document.getElementById("result");
+        let scoreText = document.getElementById("score");
+        let nextButton = document.getElementById("nextBtn");
+        let restartButton = document.getElementById("restartBtn");
+
+        // Ipakita ang question at choices.
+        function showQuestion() {
+            questionText.textContent = questions[current].question;
+            choice1.textContent = questions[current].choices[0];
+            choice2.textContent = questions[current].choices[1];
+            choice3.textContent = questions[current].choices[2];
+            choice4.textContent = questions[current].choices[3];
+
+            // Payagan ulit ang pag-click sa answer buttons.
+            answered = false;
+            choice1.disabled = false;
+            choice2.disabled = false;
+            choice3.disabled = false;
+            choice4.disabled = false;
+
+            // I-clear ang result at ipakita ang score.
+            result.textContent = "";
+            scoreText.textContent = "Score: " + score;
+
+            // Ipakita ang Next button at itago ang Restart button.
+            choices.hidden = false;
+            nextButton.hidden = false;
+            restartButton.hidden = true;
+        }
+
+        // I-check kung tama ang napiling answer.
+        function checkAnswer(answer) {
+            if (answered === false) {
+                if (answer === questions[current].answer) {
+                    result.textContent = "Correct!";
+                    score = score + 1;
+                } else {
+                    result.textContent = "Wrong!";
+                }
+
+                scoreText.textContent = "Score: " + score;
+                answered = true;
+
+                // I-disable ang answer buttons para hindi na makasagot ulit.
+                choice1.disabled = true;
+                choice2.disabled = true;
+                choice3.disabled = true;
+                choice4.disabled = true;
+            }
+        }
+
+        // Lumipat sa susunod na question.
+        function nextQuestion() {
+            if (current < questions.length) {
+                if (answered === true) {
+                    current = current + 1;
+
+                    if (current < questions.length) {
+                        showQuestion();
+                    } else {
+                        // Ipakita ang final score at Restart button.
+                        questionText.textContent = "Quiz Finished!";
+                        result.textContent = "Your final score is " + score + " out of " + questions.length;
+                        choices.hidden = true;
+                        nextButton.hidden = true;
+                        restartButton.hidden = false;
+                    }
+                } else {
+                    result.textContent = "Please choose an answer first.";
+                }
+            }
+        }
+
+        // I-reset ang quiz at score.
+        function restartQuiz() {
+            current = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        // Simulan ang quiz.
+        showQuestion();
+    
+
+        // Activity para sa school search.
+        // Naka-save na yung name ng mga school sa objects na nakalagay sa array.
+        let schools = [
+            { name: "Arellano" },
+            { name: "Ateneo" },
+            { name: "FEU" },
+            { name: "JRU" },
+            { name: "RTU" }
+        ];
+
+        // Hanapin ang school name na nilagay ng user.
+        function searchSchool() {
+            // Alisin ang sobrang spaces at gawing lowercase ang input.
+            let schoolName = document.getElementById("schoolInput").value.trim().toLowerCase();
+            let found = false;
+            let i = 0;
+
+            // I-compare ang input sa bawat school name.
+            while (i < schools.length) {
+                if (schoolName === schools[i].name.toLowerCase()) {
+                    found = true;
+                }
+                i = i + 1;
+            }
+
+            if (found === true) {
+                document.getElementById("schoolResult").textContent = "School Found!";
+            } else {
+                document.getElementById("schoolResult").textContent = "School Not Found!";
+            }
+        }
+    
+
+        // Chinecheck nito kung valid yung grade tapos titingnan kung pasado ba or bagsak ang grade.
+        function checkGrade() {
+            let gradeText = document.getElementById("gradeInput").value;
+            let grade = Number(gradeText);
+            let gradeResult = document.getElementById("gradeResult");
+
+            if (gradeText === "" || isNaN(grade) || grade < 0 || grade > 100) {
+                gradeResult.textContent = "Please enter a grade from 0 to 100.";
+            } else if (grade >= 75) {
+                gradeResult.textContent = "Congratulations! You Passed.";
+            } else {
+                gradeResult.textContent = "Sorry! You Failed.";
+            }
+        }
+
+        //Countdown Timer
+        const countdown = document.getElementById("countdown");
+        const displayMsg = document.getElementById("display-msg");
+        const timerInput = document.getElementById("timer-input");
+        let timeLeft = 60;
+        let timer = null;
+
+        // Ididisplay nito yung natitirang timer in seconds
+        function updateCountdown() {
+            countdown.textContent = "Time Remaining: " + timeLeft + " seconds";
+        }
+
+        // Kukunin nito ang value sa timer input pagka click ng start.
+        function startTimer() {
+            // Hahanapin nito ang value sa timer input pagka click ng start button.
+            if (timer !== null) {
+                return;
+            }
+
+            let startingTime = Number(timerInput.value);
+
+            if (timerInput.value === "" || isNaN(startingTime) || startingTime < 1 || startingTime % 1 !== 0) {
+                displayMsg.textContent = "Please enter a positive whole number of seconds.";
+                return;
+            }
+
+            timeLeft = startingTime;
+            updateCountdown();
+            displayMsg.textContent = "";
+
+            // Tatakbo ang timer kada 1 second.
+            timer = setInterval(countDown, 1000);
+        }
+
+        // Binabawasan ng 1 second yung countdown at magsstop kapag zero na ang timer.
+        function countDown() {
+            timeLeft = timeLeft - 1;
+            updateCountdown();
+
+            if (timeLeft === 0) {
+                clearInterval(timer);
+                timer = null;
+                displayMsg.textContent = "Time's Up!";
+            }
+        }
+
+        // Naka-pause ang countdown 
+        function stopTimer() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        // Itutuloy nito ang countdown
+        function resumeTimer() {
+            if (timer === null && timeLeft > 0) {
+                displayMsg.textContent = "";
+                timer = setInterval(countDown, 1000);
+            }
+        }
+
+        // Ititigil nito ang timer at gagamitin yung time na nilagay sa textbox.
+        function resetTimer() {
+            stopTimer();
+            let startingTime = Number(timerInput.value);
+
+            if (timerInput.value === "" || isNaN(startingTime) || startingTime < 1 || startingTime % 1 !== 0) {
+                timeLeft = 0;
+                displayMsg.textContent = "Please enter a positive whole number of seconds.";
+            } else {
+                timeLeft = startingTime;
+                displayMsg.textContent = "";
+            }
+
+            updateCountdown();
+        }
+
+
+    </script>
+</body>
+</html>
